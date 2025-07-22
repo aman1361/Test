@@ -365,203 +365,209 @@
   <script src='https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js'></script>
   <script src="js/index.js"></script>
   <script>
-    // RSVP Functions
-    function showRSVPForm(type) {
-      document.querySelector('.slide-container').style.display = 'none';
-      document.getElementById('attending').style.display = 'none';
-      document.getElementById('notAttending').style.display = 'none';
-      document.getElementById(type).style.display = 'block';
+  // RSVP Functions
+  function showRSVPForm(type) {
+    document.querySelector('.slide-container').style.display = 'none';
+    document.getElementById('attending').style.display = 'none';
+    document.getElementById('notAttending-form').style.display = 'none';
+
+    if (type === 'attending') {
+      document.getElementById('attending').style.display = 'block';
+    } else if (type === 'notAttending') {
+      document.getElementById('notAttending-form').style.display = 'block';
     }
-    
-    function hideRSVPForm() {
-      document.getElementById('attending').style.display = 'none';
-      document.getElementById('notAttending').style.display = 'none';
-      document.querySelector('.slide-container').style.display = 'block';
+  }
+
+  function hideRSVPForm() {
+    document.getElementById('attending').style.display = 'none';
+    document.getElementById('notAttending-form').style.display = 'none';
+    document.querySelector('.slide-container').style.display = 'block';
+  }
+
+  function increment(inputId) {
+    const input = document.getElementById(inputId);
+    if (parseInt(input.value) < parseInt(input.max)) {
+      input.value = parseInt(input.value) + 1;
     }
-    
-    function increment(inputId) {
-      const input = document.getElementById(inputId);
-      if (parseInt(input.value) < parseInt(input.max)) {
-        input.value = parseInt(input.value) + 1;
+  }
+
+  function decrement(inputId) {
+    const input = document.getElementById(inputId);
+    if (parseInt(input.value) > parseInt(input.min)) {
+      input.value = parseInt(input.value) - 1;
+    }
+  }
+
+  function submitAttendingForm() {
+    const rsvpData = {
+      name: document.getElementById('attending-name').value,
+      contact: document.getElementById('attending-contact').value,
+      adults: document.getElementById('attending-adults').value,
+      children: document.getElementById('attending-children').value,
+      attending: true,
+      timestamp: new Date().toISOString()
+    };
+
+    if (!rsvpData.name || !rsvpData.contact) {
+      alert('Please fill in all required fields');
+      return;
+    }
+
+    saveRSVP(rsvpData);
+    showConfirmation(rsvpData);
+  }
+
+  function submitNotAttendingForm() {
+    const rsvpData = {
+      name: document.getElementById('notAttending-name').value,
+      contact: document.getElementById('notAttending-contact').value,
+      message: document.getElementById('notAttending-message').value,
+      attending: false,
+      timestamp: new Date().toISOString()
+    };
+
+    if (!rsvpData.name || !rsvpData.contact) {
+      alert('Please fill in all required fields');
+      return;
+    }
+
+    saveRSVP(rsvpData);
+    showConfirmation(rsvpData);
+  }
+
+  function saveRSVP(data) {
+    let rsvps = JSON.parse(localStorage.getItem('kianBirthdayRSVPs') || '[]');
+    rsvps.push(data);
+    localStorage.setItem('kianBirthdayRSVPs', JSON.stringify(rsvps));
+    updateAdminPanel();
+  }
+
+  function showConfirmation(data) {
+    const message = document.getElementById('confirmation-message');
+
+    if (data.attending) {
+      message.innerHTML = `
+        <p>Thank you for your RSVP, ${data.name}!</p>
+        <p>We look forward to seeing you and your party of ${parseInt(data.adults) + parseInt(data.children)} at Kian's birthday!</p>
+        <p style="font-size: 48px; margin-top: 20px;">🎉</p>
+      `;
+    } else {
+      message.innerHTML = `
+        <p>Thank you for letting us know, ${data.name}.</p>
+        <p>We're sorry you can't make it but appreciate your response.</p>
+        <p style="font-size: 48px; margin-top: 20px;">😊</p>
+      `;
+    }
+
+    document.getElementById('attending').style.display = 'none';
+    document.getElementById('notAttending-form').style.display = 'none';
+    document.getElementById('confirmation-slide').style.display = 'block';
+  }
+
+  function hideConfirmation() {
+    document.getElementById('confirmation-slide').style.display = 'none';
+    document.querySelector('.slide-container').style.display = 'block';
+  }
+
+  // Admin Panel Functions
+  document.getElementById('show-admin').addEventListener('click', function () {
+    updateAdminPanel();
+    document.getElementById('admin-modal').style.display = 'block';
+  });
+
+  function closeAdminPanel() {
+    document.getElementById('admin-modal').style.display = 'none';
+  }
+
+  function updateAdminPanel() {
+    const rsvps = JSON.parse(localStorage.getItem('kianBirthdayRSVPs') || '[]');
+    const summary = document.getElementById('admin-summary');
+    const responses = document.getElementById('admin-responses');
+
+    if (rsvps.length === 0) {
+      summary.innerHTML = '<p>No RSVPs yet</p>';
+      responses.innerHTML = '';
+      return;
+    }
+
+    // Calculate totals
+    let attendingCount = 0;
+    let adultCount = 0;
+    let childCount = 0;
+
+    rsvps.forEach(rsvp => {
+      if (rsvp.attending) {
+        attendingCount++;
+        adultCount += parseInt(rsvp.adults);
+        childCount += parseInt(rsvp.children);
       }
-    }
-    
-    function decrement(inputId) {
-      const input = document.getElementById(inputId);
-      if (parseInt(input.value) > parseInt(input.min)) {
-        input.value = parseInt(input.value) - 1;
-      }
-    }
-    
-    function submitAttendingForm() {
-      const rsvpData = {
-        name: document.getElementById('attending-name').value,
-        contact: document.getElementById('attending-contact').value,
-        adults: document.getElementById('attending-adults').value,
-        children: document.getElementById('attending-children').value,
-        attending: true,
-        timestamp: new Date().toISOString()
-      };
-      
-      if (!rsvpData.name || !rsvpData.contact) {
-        alert('Please fill in all required fields');
-        return;
-      }
-      
-      saveRSVP(rsvpData);
-      showConfirmation(rsvpData);
-    }
-    
-    function submitNotAttendingForm() {
-      const rsvpData = {
-        name: document.getElementById('notAttending-name').value,
-        contact: document.getElementById('notAttending-contact').value,
-        message: document.getElementById('notAttending-message').value,
-        attending: false,
-        timestamp: new Date().toISOString()
-      };
-      
-      if (!rsvpData.name || !rsvpData.contact) {
-        alert('Please fill in all required fields');
-        return;
-      }
-      
-      saveRSVP(rsvpData);
-      showConfirmation(rsvpData);
-    }
-    
-    function saveRSVP(data) {
-      let rsvps = JSON.parse(localStorage.getItem('kianBirthdayRSVPs') || '[]');
-      rsvps.push(data);
-      localStorage.setItem('kianBirthdayRSVPs', JSON.stringify(rsvps));
-      updateAdminPanel();
-    }
-    
-    function showConfirmation(data) {
-      const message = document.getElementById('confirmation-message');
-      
-      if (data.attending) {
-        message.innerHTML = `
-          <p>Thank you for your RSVP, ${data.name}!</p>
-          <p>We look forward to seeing you and your party of ${parseInt(data.adults) + parseInt(data.children)} at Kian's birthday!</p>
-          <p style="font-size: 48px; margin-top: 20px;">🎉</p>
-        `;
-      } else {
-        message.innerHTML = `
-          <p>Thank you for letting us know, ${data.name}.</p>
-          <p>We're sorry you can't make it but appreciate your response.</p>
-          <p style="font-size: 48px; margin-top: 20px;">😊</p>
-        `;
-      }
-      
-      document.getElementById('attending').style.display = 'none';
-      document.getElementById('notAttending').style.display = 'none';
-      document.getElementById('confirmation-slide').style.display = 'block';
-    }
-    
-    function hideConfirmation() {
-      document.getElementById('confirmation-slide').style.display = 'none';
-      document.querySelector('.slide-container').style.display = 'block';
-    }
-    
-    // Admin Panel Functions
-    document.getElementById('show-admin').addEventListener('click', function() {
-      updateAdminPanel();
-      document.getElementById('admin-modal').style.display = 'block';
     });
-    
-    function closeAdminPanel() {
-      document.getElementById('admin-modal').style.display = 'none';
-    }
-    
-    function updateAdminPanel() {
-      const rsvps = JSON.parse(localStorage.getItem('kianBirthdayRSVPs') || '[]');
-      const summary = document.getElementById('admin-summary');
-      const responses = document.getElementById('admin-responses');
-      
-      if (rsvps.length === 0) {
-        summary.innerHTML = '<p>No RSVPs yet</p>';
-        responses.innerHTML = '';
-        return;
-      }
-      
-      // Calculate totals
-      let attendingCount = 0;
-      let adultCount = 0;
-      let childCount = 0;
-      
-      rsvps.forEach(rsvp => {
-        if (rsvp.attending) {
-          attendingCount++;
-          adultCount += parseInt(rsvp.adults);
-          childCount += parseInt(rsvp.children);
-        }
-      });
-      
-      // Update summary
-      summary.innerHTML = `
-        <div class="summary-item">
-          <h3>Total Responses:</h3>
-          <p>${rsvps.length}</p>
-        </div>
-        <div class="summary-item">
-          <h3>Attending:</h3>
-          <p>${attendingCount}</p>
-        </div>
-        <div class="summary-item">
-          <h3>Total Adults:</h3>
-          <p>${adultCount}</p>
-        </div>
-        <div class="summary-item">
-          <h3>Total Children:</h3>
-          <p>${childCount}</p>
+
+    // Update summary
+    summary.innerHTML = `
+      <div class="summary-item">
+        <h3>Total Responses:</h3>
+        <p>${rsvps.length}</p>
+      </div>
+      <div class="summary-item">
+        <h3>Attending:</h3>
+        <p>${attendingCount}</p>
+      </div>
+      <div class="summary-item">
+        <h3>Total Adults:</h3>
+        <p>${adultCount}</p>
+      </div>
+      <div class="summary-item">
+        <h3>Total Children:</h3>
+        <p>${childCount}</p>
+      </div>
+    `;
+
+    // Update responses list
+    responses.innerHTML = '<h3>All Responses:</h3>';
+    rsvps.forEach(rsvp => {
+      const date = new Date(rsvp.timestamp).toLocaleString();
+      responses.innerHTML += `
+        <div class="response-item ${rsvp.attending ? 'attending' : 'not-attending'}">
+          <p><strong>${rsvp.name}</strong> - ${date}</p>
+          <p>${rsvp.contact}</p>
+          ${rsvp.attending ?
+            `<p>Attending with ${rsvp.adults} adults and ${rsvp.children} children</p>` :
+            `<p>Not attending${rsvp.message ? ': ' + rsvp.message : ''}</p>`}
         </div>
       `;
-      
-      // Update responses list
-      responses.innerHTML = '<h3>All Responses:</h3>';
-      rsvps.forEach(rsvp => {
-        const date = new Date(rsvp.timestamp).toLocaleString();
-        responses.innerHTML += `
-          <div class="response-item ${rsvp.attending ? 'attending' : 'not-attending'}">
-            <p><strong>${rsvp.name}</strong> - ${date}</p>
-            <p>${rsvp.contact}</p>
-            ${rsvp.attending ? 
-              `<p>Attending with ${rsvp.adults} adults and ${rsvp.children} children</p>` : 
-              `<p>Not attending${rsvp.message ? ': ' + rsvp.message : ''}</p>`}
-          </div>
-        `;
-      });
-    }
-    
-    // Export to CSV
-    document.getElementById('export-data').addEventListener('click', function() {
-      const rsvps = JSON.parse(localStorage.getItem('kianBirthdayRSVPs') || '[]');
-      
-      if (rsvps.length === 0) {
-        alert('No data to export');
-        return;
-      }
-      
-      let csvContent = "Name,Contact,Attending,Adults,Children,Message,Timestamp\n";
-      
-      rsvps.forEach(rsvp => {
-        csvContent += `"${rsvp.name}","${rsvp.contact}",${rsvp.attending ? 'Yes' : 'No'},${rsvp.adults || '0'},${rsvp.children || '0'},"${rsvp.message || ''}","${rsvp.timestamp}"\n`;
-      });
-      
-      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.setAttribute('href', url);
-      link.setAttribute('download', 'kian_birthday_rsvps.csv');
-      link.style.visibility = 'hidden';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
     });
-    
-    // Initialize admin panel
-    updateAdminPanel();
-  </script>
+  }
+
+  // Export to CSV
+  document.getElementById('export-data').addEventListener('click', function () {
+    const rsvps = JSON.parse(localStorage.getItem('kianBirthdayRSVPs') || '[]');
+
+    if (rsvps.length === 0) {
+      alert('No data to export');
+      return;
+    }
+
+    let csvContent = "Name,Contact,Attending,Adults,Children,Message,Timestamp\n";
+
+    rsvps.forEach(rsvp => {
+      csvContent += `"${rsvp.name}","${rsvp.contact}",${rsvp.attending ? 'Yes' : 'No'},${rsvp.adults || '0'},${rsvp.children || '0'},"${rsvp.message || ''}","${rsvp.timestamp}"\n`;
+    });
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.setAttribute('href', url);
+    link.setAttribute('download', 'kian_birthday_rsvps.csv');
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  });
+
+  // Initialize admin panel
+  updateAdminPanel();
+</script>
+
 </body>
 </html>
