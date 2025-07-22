@@ -368,11 +368,9 @@
     // RSVP Functions
     function showRSVPForm(type) {
       document.querySelector('.slide-container').style.display = 'none';
-      if (type === 'attending') {
-        document.getElementById('attending-form').style.display = 'block';
-      } else {
-        document.getElementById('notAttending-form').style.display = 'block';
-      }
+      document.getElementById('attending').style.display = 'none';
+      document.getElementById('notAttending').style.display = 'none';
+      document.getElementById(type).style.display = 'block';
     }
     
     function hideRSVPForm() {
