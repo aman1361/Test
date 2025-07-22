@@ -243,47 +243,81 @@
         </div>
       </div>
     </div>
+    
     <div class="wrapper">
-      <div class="clash-card barbarian">
-        <button class="prevBtn"><img src="images/prev.svg" alt="Previous" width="12"> Prev</button>
+       <div class="clash-card barbarian">
+        <button class="prevBtn" onclick="hideRSVPForm()"><img src="images/prev.svg" alt="Previous" width="12"> Prev</button>
         <div class="leaf"></div>
         <div class="letter-box">
           <div class="wrap-box">
-            <span class="label-box">Venue</span>
+            <span class="label-box">RSVP - Will Attend</span>
           </div>
           <div class="wrap-box">
-            <div class="address">Skyline Room<br />Cerritos Library<br />18025 Bloomfield Ave.<br />Cerritos, CA 90703<br /><br />or<br /></div>
+            <div class="form-group">
+              <label for="attending-name">Your Name:</label>
+              <input type="text" id="attending-name" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="attending-contact">Email or Phone:</label>
+              <input type="text" id="attending-contact" required>
+            </div>
           </div>
           <div class="wrap-box">
-            <a class="label-box" target="_blank" href="https://maps.app.goo.gl/X8RRY2AoorZsvGtQ9">Find the Direction</a>
+            <div class="form-group">
+              <label>Number of Adults:</label>
+              <div class="number-control">
+                <button type="button" class="decrement-btn" onclick="decrement('attending-adults')">-</button>
+                <input type="number" id="attending-adults" class="number-input" value="1" min="0" max="10">
+                <button type="button" class="increment-btn" onclick="increment('attending-adults')">+</button>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label>Number of Children:</label>
+              <div class="number-control">
+                <button type="button" class="decrement-btn" onclick="decrement('attending-children')">-</button>
+                <input type="number" id="attending-children" class="number-input" value="0" min="0" max="10">
+                <button type="button" class="increment-btn" onclick="increment('attending-children')">+</button>
+              </div>
+            </div>
           </div>
           <div class="wrap-box">
-            <a class="label-box" href="tel:+1 4423576609">Call Me</a>
+            <button type="button" class="submit-btn" onclick="submitAttendingForm()">Submit RSVP</button>
           </div>
         </div>
-        <button class="nextBtn">Next <img src="images/next.svg" alt="next" width="12"></button>
       </div>
     </div>
 
     <div class="wrapper">
       <div class="clash-card barbarian">
-        <button class="prevBtn"><img src="images/prev.svg" alt="Previous" width="12"> Prev</button>
+        <button class="prevBtn" onclick="hideRSVPForm()"><img src="images/prev.svg" alt="Previous" width="12"> Prev</button>
         <div class="leaf"></div>
         <div class="letter-box">
           <div class="wrap-box">
-            <span class="label-box">Venue</span>
+            <span class="label-box">RSVP - Will Not Attend</span>
           </div>
           <div class="wrap-box">
-            <div class="address">Skyline Room<br />Cerritos Library<br />18025 Bloomfield Ave.<br />Cerritos, CA 90703<br /><br />or<br /></div>
+            <div class="form-group">
+              <label for="notAttending-name">Your Name:</label>
+              <input type="text" id="notAttending-name" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="notAttending-contact">Email or Phone:</label>
+              <input type="text" id="notAttending-contact" required>
+            </div>
           </div>
           <div class="wrap-box">
-            <a class="label-box" target="_blank" href="https://maps.app.goo.gl/X8RRY2AoorZsvGtQ9">Find the Direction</a>
+            <div class="form-group">
+              <label for="notAttending-message">Message (optional):</label>
+              <textarea id="notAttending-message" rows="3"></textarea>
+            </div>
           </div>
           <div class="wrap-box">
-            <a class="label-box" href="tel:+1 4423576609">Call Me</a>
+            <button type="button" class="submit-btn" onclick="submitNotAttendingForm()">Submit RSVP</button>
           </div>
         </div>
-        <button class="nextBtn">Next <img src="images/next.svg" alt="next" width="12"></button>
       </div>
     </div>
 
