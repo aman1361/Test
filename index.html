@@ -291,7 +291,7 @@
     </div>
     
     <!-- Will Not Attend Form -->
-    <div class="wrapper" id="notAttending-form" style="display:none;">
+    <div class="wrapper" id="notAttending" style="display:none;">
       <div class="clash-card barbarian">
         <button class="prevBtn" onclick="hideRSVPForm()"><img src="images/prev.svg" alt="Previous" width="12"> Prev</button>
         <div class="leaf"></div>
@@ -374,8 +374,8 @@
     }
     
     function hideRSVPForm() {
-      document.getElementById('attending-form').style.display = 'none';
-      document.getElementById('notAttending-form').style.display = 'none';
+      document.getElementById('attending').style.display = 'none';
+      document.getElementById('notAttending').style.display = 'none';
       document.querySelector('.slide-container').style.display = 'block';
     }
     
@@ -454,8 +454,8 @@
         `;
       }
       
-      document.getElementById('attending-form').style.display = 'none';
-      document.getElementById('notAttending-form').style.display = 'none';
+      document.getElementById('attending').style.display = 'none';
+      document.getElementById('notAttending').style.display = 'none';
       document.getElementById('confirmation-slide').style.display = 'block';
     }
     
