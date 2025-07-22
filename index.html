@@ -187,78 +187,67 @@
   
   <!-- RSVP Modal for Attending -->
 <div id="rsvp-attending-modal" class="rsvp-modal">
-    <div class="rsvp-content">
-      <span class="close-btn" onclick="closeModal('rsvp-attending-modal')">&times;</span>
-      <h2>RSVP - Will Attend</h2>
-      <form id="attending-form">
-        <div class="form-group">
-          <label for="attending-name">Your Name:</label>
-          <input type="text" id="attending-name" required>
-        </div>
-        
-        <div class="form-group">
-          <label for="attending-contact">Email or Phone:</label>
-          <input type="text" id="attending-contact" required>
-        </div>
-        
-        <div class="form-group">
-          <label>Number of Adults:</label>
-          <div class="number-control">
-            <button type="button" class="decrement-btn" onclick="decrement('attending-adults')">-</button>
-            <input type="number" id="attending-adults" class="number-input" value="1" min="0" max="10">
-            <button type="button" class="increment-btn" onclick="increment('attending-adults')">+</button>
-          </div>
-        </div>
-        
-        <div class="form-group">
-          <label>Number of Children:</label>
-          <div class="number-control">
-            <button type="button" class="decrement-btn" onclick="decrement('attending-children')">-</button>
-            <input type="number" id="attending-children" class="number-input" value="0" min="0" max="10">
-            <button type="button" class="increment-btn" onclick="increment('attending-children')">+</button>
-          </div>
-        </div>
-        
-        <button type="submit" class="submit-btn">Submit RSVP</button>
-      </form>
-    </div>
-  </div>
-  
-  <!-- RSVP Modal for Not Attending -->
-  <div id="rsvp-notAttending-modal" class="rsvp-modal">
-    <div class="rsvp-content">
-      <span class="close-btn" onclick="closeModal('rsvp-notAttending-modal')">&times;</span>
-      <h2>RSVP - Will Not Attend</h2>
-      <form id="notAttending-form">
-        <div class="form-group">
-          <label for="notAttending-name">Your Name:</label>
-          <input type="text" id="notAttending-name" required>
-        </div>
-        
-        <div class="form-group">
-          <label for="notAttending-contact">Email or Phone:</label>
-          <input type="text" id="notAttending-contact" required>
-        </div>
-        
-        <div class="form-group">
-          <label for="notAttending-message">Message (optional):</label>
-          <textarea id="notAttending-message"></textarea>
-        </div>
-        
-        <button type="submit" class="submit-btn">Submit RSVP</button>
-      </form>
-    </div>
-  </div>
-  
-  <!-- Confirmation Modal -->
-  <div id="confirmation-modal" class="rsvp-modal">
-    <div class="rsvp-content">
-      <h2>Thank You!</h2>
-      <div id="confirmation-message"></div>
-      <button onclick="closeModal('confirmation-modal')" class="submit-btn">Close</button>
-    </div>
-  </div>
-  
+<div class="rsvp-content"><span class="close-btn">&times;</span>
+<h2>RSVP - Will Attend</h2>
+<table>
+<tbody>
+<tr>
+<td><label for="attending-name">Your Name:</label></td>
+<td>&nbsp;<input id="attending-name" required="" type="text" /></td>
+</tr>
+<tr>
+<td><label for="attending-contact">Email or Phone:</label></td>
+<td>&nbsp;<input id="attending-contact" required="" type="text" /></td>
+</tr>
+</tbody>
+</table>
+<form id="attending-form">
+<div class="form-group">&nbsp;</div>
+<div class="form-group">&nbsp;</div>
+<div class="form-group"><label>Number of Adults:</label>
+<div class="number-control"><button class="decrement-btn" type="button">-</button> <input id="attending-adults" class="number-input" max="10" min="0" type="number" value="1" /> <button class="increment-btn" type="button">+</button></div>
+</div>
+<div class="form-group"><label>Number of Children:</label>
+<div class="number-control"><button class="decrement-btn" type="button">-</button> <input id="attending-children" class="number-input" max="10" min="0" type="number" value="0" /> <button class="increment-btn" type="button">+</button></div>
+<div class="number-control">&nbsp;</div>
+</div>
+<button class="submit-btn" type="submit">Submit RSVP</button></form></div>
+</div>
+<!-- RSVP Modal for Not Attending -->
+<div id="rsvp-notAttending-modal" class="rsvp-modal">
+<div class="rsvp-content"><span class="close-btn">&times;</span>
+<h2>RSVP - Will Not Attend</h2>
+<table>
+<tbody>
+<tr>
+<td>
+<div class="form-group"><label for="notAttending-name">Your Name:</label>&nbsp;</div>
+</td>
+<td>
+<div class="form-group"><input id="notAttending-name" required="" type="text" /></div>
+</td>
+</tr>
+<tr>
+<td><label for="notAttending-contact">Email or Phone:</label></td>
+<td><input id="notAttending-contact" required="" type="text" /></td>
+</tr>
+<tr>
+<td><label for="notAttending-message">Message (optional):</label></td>
+<td>&nbsp;<textarea id="notAttending-message"></textarea></td>
+</tr>
+</tbody>
+</table>
+<form id="notAttending-form">
+<div class="form-group">&nbsp;</div>
+<button class="submit-btn" type="submit">Submit RSVP</button></form></div>
+</div>
+<!-- Confirmation Modal -->
+<div id="confirmation-modal" class="rsvp-modal">
+<div class="rsvp-content">
+<h2>Thank You!</h2>
+<div id="confirmation-message">&nbsp;</div>
+<button class="submit-btn">Close</button></div>
+</div>
   <!-- Admin Panel Button -->
   <div id="admin-button" class="fixed bottom-4 right-4">
     <button id="show-admin" class="bg-gray-700 hover:bg-gray-800 text-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg">
