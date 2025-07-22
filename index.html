@@ -140,7 +140,7 @@
   <div id="overlay" class="overlay">
     <div class="info">
       <div class="head">Birthday Invitation</div>
-      <img src="images/LoadingCake.png" alt="Cake1" width="100">
+      <img src="images/LoadingCake.png" alt="Cake2" width="100">
       <p>Loading...</p>
     </div>
   </div>
@@ -245,25 +245,7 @@
     </div>
     
     <!-- Will Attend Form -->
-    <div class="wrapper" id="attending">
-      <div class="clash-card barbarian">
-        <button class="prevBtn" onclick="hideRSVPForm()"><img src="images/prev.svg" alt="Previous" width="12"> Prev</button>
-        <div class="leaf"></div>
-        <div class="letter-box">
-          <div class="wrap-box">
-            <span class="label-box">RSVP - Will Attend</span>
-          </div>
-          <div class="wrap-box">
-            <div class="form-group">
-              <label for="attending-name">Your Name:</label>
-              <input type="text" id="attending-name" required>
-            </div>
-            
-            <div class="form-group">
-              <label for="attending-contact">Email or Phone:</label>
-              <input type="text" id="attending-contact" required>
-            </div>
-          </div>
+    
           <div class="wrap-box">
             <div class="form-group">
               <label>Number of Adults:</label>
@@ -291,25 +273,7 @@
     </div>
     
     <!-- Will Not Attend Form -->
-    <div class="wrapper" id="notAttending" style="display:none;">
-      <div class="clash-card barbarian">
-        <button class="prevBtn" onclick="hideRSVPForm()"><img src="images/prev.svg" alt="Previous" width="12"> Prev</button>
-        <div class="leaf"></div>
-        <div class="letter-box">
-          <div class="wrap-box">
-            <span class="label-box">RSVP - Will Not Attend</span>
-          </div>
-          <div class="wrap-box">
-            <div class="form-group">
-              <label for="notAttending-name">Your Name:</label>
-              <input type="text" id="notAttending-name" required>
-            </div>
-            
-            <div class="form-group">
-              <label for="notAttending-contact">Email or Phone:</label>
-              <input type="text" id="notAttending-contact" required>
-            </div>
-          </div>
+    
           <div class="wrap-box">
             <div class="form-group">
               <label for="notAttending-message">Message (optional):</label>
@@ -324,10 +288,7 @@
     </div>
     
     <!-- Confirmation Slide -->
-    <div class="wrapper" id="confirmation-slide" style="display:none;">
-      <div class="clash-card barbarian">
-        <button class="prevBtn" onclick="hideConfirmation()"><img src="images/prev.svg" alt="Previous" width="12"> Prev</button>
-        <div class="leaf"></div>
+    
         <div class="letter-box">
           <div class="wrap-box">
             <span class="label-box">Thank You!</span>
@@ -366,19 +327,26 @@
   <script src="js/index.js"></script>
   <script>
   // RSVP Functions
-  function showRSVPForm(type) {
-    document.querySelector('.slide-container').style.display = 'none';
-    document.getElementById('attending').style.display = 'none';
-    document.getElementById('notAttending').style.display = 'none';
+  
+    function showRSVPForm(type) {
+      document.querySelector('.slide-container').style.display = 'none';
+      document.getElementById('attending').style.display = 'none';
+      document.getElementById('notAttending').style.display = 'none';
+      document.getElementById('confirmation-slide').style.display = 'none';
 
-    if (type === 'attending') {
-      document.getElementById('attending').style.display = 'block';
-    } else if (type === 'notAttending') {
-      document.getElementById('notAttending').style.display = 'block';
+      if (type === 'attending') {
+        document.getElementById('attending').style.display = 'block';
+      } else if (type === 'notAttending') {
+        document.getElementById('notAttending').style.display = 'block';
+      }
     }
-  }
 
-  function hideRSVPForm() {
+    function hideRSVPForm() {
+      document.getElementById('attending').style.display = 'none';
+      document.getElementById('notAttending').style.display = 'none';
+      document.querySelector('.slide-container').style.display = 'block';
+    }
+    
     document.getElementById('attending').style.display = 'none';
     document.getElementById('notAttending').style.display = 'none';
     document.querySelector('.slide-container').style.display = 'block';
@@ -569,5 +537,45 @@
   updateAdminPanel();
 </script>
 
+<div class="wrapper" id="attending">
+      <div class="clash-card barbarian">
+        <button class="prevBtn" onclick="hideRSVPForm()"><img src="images/prev.svg" alt="Previous" width="12"> Prev</button>
+        <div class="leaf"></div>
+        <div class="letter-box">
+          <div class="wrap-box">
+            <span class="label-box">RSVP - Will Attend</span>
+          </div>
+          <div class="wrap-box">
+            <div class="form-group">
+              <label for="attending-name">Your Name:</label>
+              <input type="text" id="attending-name" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="attending-contact">Email or Phone:</label>
+              <input type="text" id="attending-contact" required>
+            </div>
+          </div><div class="wrapper" id="notAttending" style="display:none;">
+      <div class="clash-card barbarian">
+        <button class="prevBtn" onclick="hideRSVPForm()"><img src="images/prev.svg" alt="Previous" width="12"> Prev</button>
+        <div class="leaf"></div>
+        <div class="letter-box">
+          <div class="wrap-box">
+            <span class="label-box">RSVP - Will Not Attend</span>
+          </div>
+          <div class="wrap-box">
+            <div class="form-group">
+              <label for="notAttending-name">Your Name:</label>
+              <input type="text" id="notAttending-name" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="notAttending-contact">Email or Phone:</label>
+              <input type="text" id="notAttending-contact" required>
+            </div>
+          </div><div class="wrapper" id="confirmation-slide" style="display:none;">
+      <div class="clash-card barbarian">
+        <button class="prevBtn" onclick="hideConfirmation()"><img src="images/prev.svg" alt="Previous" width="12"> Prev</button>
+        <div class="leaf"></div>
 </body>
 </html>
