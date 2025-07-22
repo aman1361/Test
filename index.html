@@ -18,40 +18,17 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="shortcut icon" href="images/favicon.ico" />
   <style>
-    /* RSVP Modal Styles */
-    .rsvp-modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0,0,0,0.7);
-      z-index: 1000;
-      overflow-y: auto;
-    }
-    
-    .rsvp-content {
-      background-color: white;
-      margin: 5% auto;
-      padding: 20px;
-      width: 90%;
-      max-width: 500px;
-      border-radius: 10px;
-      position: relative;
-    }
-    
-    .close-btn {
-      position: absolute;
-      top: 10px;
-      right: 20px;
-      font-size: 28px;
-      cursor: pointer;
+    /* Custom styles for RSVP forms */
+    .number-control {
+      display: flex;
+      align-items: center;
+      margin-top: 5px;
     }
     
     .number-input {
-      width: 60px;
+      width: 50px;
       text-align: center;
+      margin: 0 5px;
     }
     
     .increment-btn, .decrement-btn {
@@ -59,18 +36,101 @@
       border: none;
       padding: 5px 10px;
       cursor: pointer;
+      border-radius: 4px;
     }
     
-    .increment-btn:hover, .decrement-btn:hover {
-      background-color: #e0e0e0;
+    .form-group {
+      margin-bottom: 15px;
     }
     
-    #confirmation-modal {
-      text-align: center;
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
     }
     
-    #confirmation-message {
-      margin: 20px 0;
+    .form-group input[type="text"],
+    .form-group textarea {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    
+    .submit-btn {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    
+    .submit-btn:hover {
+      background-color: #45a049;
+    }
+    
+    /* Admin panel styles */
+    #admin-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+    
+    #admin-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.7);
+      z-index: 1001;
+      overflow-y: auto;
+    }
+    
+    .admin-content {
+      background-color: white;
+      margin: 5% auto;
+      padding: 20px;
+      width: 90%;
+      max-width: 800px;
+      border-radius: 10px;
+      position: relative;
+    }
+    
+    .close-admin {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 28px;
+      cursor: pointer;
+    }
+    
+    .summary-box {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+      padding: 15px;
+      background-color: #f9f9f9;
+      border-radius: 8px;
+    }
+    
+    .response-item {
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    
+    .attending {
+      background-color: #e8f5e9;
+    }
+    
+    .not-attending {
+      background-color: #ffebee;
     }
   </style>
 </head>
@@ -183,97 +243,120 @@
         </div>
       </div>
     </div>
-  </div>
-  
-  <!-- RSVP Modal for Attending -->
-  <div id="rsvp-attending-modal" class="rsvp-modal">
-    <div class="rsvp-content">
-      <span class="close-btn" onclick="closeModal('rsvp-attending-modal')">&times;</span>
-      <h2>RSVP - Will Attend</h2>
-      <form id="attending-form">
-        <div class="form-group">
-          <label for="attending-name">Your Name:</label>
-          <input type="text" id="attending-name" required>
-        </div>
-        
-        <div class="form-group">
-          <label for="attending-contact">Email or Phone:</label>
-          <input type="text" id="attending-contact" required>
-        </div>
-        
-        <div class="form-group">
-          <label>Number of Adults:</label>
-          <div class="number-control">
-            <button type="button" class="decrement-btn" onclick="decrement('attending-adults')">-</button>
-            <input type="number" id="attending-adults" class="number-input" value="1" min="0" max="10">
-            <button type="button" class="increment-btn" onclick="increment('attending-adults')">+</button>
+    
+    <!-- Will Attend Form -->
+    <div class="wrapper" id="attending-form" style="display:none;">
+      <div class="clash-card barbarian">
+        <button class="prevBtn" onclick="hideRSVPForm()"><img src="images/prev.svg" alt="Previous" width="12"> Prev</button>
+        <div class="leaf"></div>
+        <div class="letter-box">
+          <div class="wrap-box">
+            <span class="label-box">RSVP - Will Attend</span>
+          </div>
+          <div class="wrap-box">
+            <div class="form-group">
+              <label for="attending-name">Your Name:</label>
+              <input type="text" id="attending-name" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="attending-contact">Email or Phone:</label>
+              <input type="text" id="attending-contact" required>
+            </div>
+          </div>
+          <div class="wrap-box">
+            <div class="form-group">
+              <label>Number of Adults:</label>
+              <div class="number-control">
+                <button type="button" class="decrement-btn" onclick="decrement('attending-adults')">-</button>
+                <input type="number" id="attending-adults" class="number-input" value="1" min="0" max="10">
+                <button type="button" class="increment-btn" onclick="increment('attending-adults')">+</button>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label>Number of Children:</label>
+              <div class="number-control">
+                <button type="button" class="decrement-btn" onclick="decrement('attending-children')">-</button>
+                <input type="number" id="attending-children" class="number-input" value="0" min="0" max="10">
+                <button type="button" class="increment-btn" onclick="increment('attending-children')">+</button>
+              </div>
+            </div>
+          </div>
+          <div class="wrap-box">
+            <button type="button" class="submit-btn" onclick="submitAttendingForm()">Submit RSVP</button>
           </div>
         </div>
-        
-        <div class="form-group">
-          <label>Number of Children:</label>
-          <div class="number-control">
-            <button type="button" class="decrement-btn" onclick="decrement('attending-children')">-</button>
-            <input type="number" id="attending-children" class="number-input" value="0" min="0" max="10">
-            <button type="button" class="increment-btn" onclick="increment('attending-children')">+</button>
+      </div>
+    </div>
+    
+    <!-- Will Not Attend Form -->
+    <div class="wrapper" id="notAttending-form" style="display:none;">
+      <div class="clash-card barbarian">
+        <button class="prevBtn" onclick="hideRSVPForm()"><img src="images/prev.svg" alt="Previous" width="12"> Prev</button>
+        <div class="leaf"></div>
+        <div class="letter-box">
+          <div class="wrap-box">
+            <span class="label-box">RSVP - Will Not Attend</span>
+          </div>
+          <div class="wrap-box">
+            <div class="form-group">
+              <label for="notAttending-name">Your Name:</label>
+              <input type="text" id="notAttending-name" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="notAttending-contact">Email or Phone:</label>
+              <input type="text" id="notAttending-contact" required>
+            </div>
+          </div>
+          <div class="wrap-box">
+            <div class="form-group">
+              <label for="notAttending-message">Message (optional):</label>
+              <textarea id="notAttending-message" rows="3"></textarea>
+            </div>
+          </div>
+          <div class="wrap-box">
+            <button type="button" class="submit-btn" onclick="submitNotAttendingForm()">Submit RSVP</button>
           </div>
         </div>
-        
-        <button type="submit" class="submit-btn">Submit RSVP</button>
-      </form>
+      </div>
+    </div>
+    
+    <!-- Confirmation Slide -->
+    <div class="wrapper" id="confirmation-slide" style="display:none;">
+      <div class="clash-card barbarian">
+        <button class="prevBtn" onclick="hideConfirmation()"><img src="images/prev.svg" alt="Previous" width="12"> Prev</button>
+        <div class="leaf"></div>
+        <div class="letter-box">
+          <div class="wrap-box">
+            <span class="label-box">Thank You!</span>
+          </div>
+          <div class="wrap-box">
+            <div id="confirmation-message" style="text-align: center; padding: 20px;"></div>
+          </div>
+          <div class="wrap-box">
+            <button class="submit-btn" onclick="hideConfirmation()">Return to Invitation</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   
-  <!-- RSVP Modal for Not Attending -->
-  <div id="rsvp-notAttending-modal" class="rsvp-modal">
-    <div class="rsvp-content">
-      <span class="close-btn" onclick="closeModal('rsvp-notAttending-modal')">&times;</span>
-      <h2>RSVP - Will Not Attend</h2>
-      <form id="notAttending-form">
-        <div class="form-group">
-          <label for="notAttending-name">Your Name:</label>
-          <input type="text" id="notAttending-name" required>
-        </div>
-        
-        <div class="form-group">
-          <label for="notAttending-contact">Email or Phone:</label>
-          <input type="text" id="notAttending-contact" required>
-        </div>
-        
-        <div class="form-group">
-          <label for="notAttending-message">Message (optional):</label>
-          <textarea id="notAttending-message"></textarea>
-        </div>
-        
-        <button type="submit" class="submit-btn">Submit RSVP</button>
-      </form>
-    </div>
-  </div>
-  
-  <!-- Confirmation Modal -->
-  <div id="confirmation-modal" class="rsvp-modal">
-    <div class="rsvp-content">
-      <h2>Thank You!</h2>
-      <div id="confirmation-message"></div>
-      <button onclick="closeModal('confirmation-modal')" class="submit-btn">Close</button>
-    </div>
-  </div>
-  
-  <!-- Admin Panel Button -->
-  <div id="admin-button" class="fixed bottom-4 right-4">
+  <!-- Admin Panel -->
+  <div id="admin-button">
     <button id="show-admin" class="bg-gray-700 hover:bg-gray-800 text-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg">
       👑
     </button>
   </div>
   
-  <!-- Admin Panel Modal -->
-  <div id="admin-modal" class="rsvp-modal">
-    <div class="rsvp-content" style="max-width: 800px;">
-      <span class="close-btn" onclick="closeModal('admin-modal')">&times;</span>
+  <div id="admin-modal">
+    <div class="admin-content">
+      <span class="close-admin" onclick="closeAdminPanel()">&times;</span>
       <h2>RSVP Responses</h2>
       <div id="admin-summary" class="summary-box"></div>
       <div id="admin-responses" class="responses-container"></div>
-      <button id="export-data" class="submit-btn">Export to CSV</button>
+      <button id="export-data" class="submit-btn" style="margin-top: 20px;">Export to CSV</button>
     </div>
   </div>
 
@@ -284,15 +367,18 @@
   <script>
     // RSVP Functions
     function showRSVPForm(type) {
+      document.querySelector('.slide-container').style.display = 'none';
       if (type === 'attending') {
-        document.getElementById('rsvp-attending-modal').style.display = 'block';
+        document.getElementById('attending-form').style.display = 'block';
       } else {
-        document.getElementById('rsvp-notAttending-modal').style.display = 'block';
+        document.getElementById('notAttending-form').style.display = 'block';
       }
     }
     
-    function closeModal(modalId) {
-      document.getElementById(modalId).style.display = 'none';
+    function hideRSVPForm() {
+      document.getElementById('attending-form').style.display = 'none';
+      document.getElementById('notAttending-form').style.display = 'none';
+      document.querySelector('.slide-container').style.display = 'block';
     }
     
     function increment(inputId) {
@@ -309,10 +395,7 @@
       }
     }
     
-    // Form Submissions
-    document.getElementById('attending-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      
+    function submitAttendingForm() {
       const rsvpData = {
         name: document.getElementById('attending-name').value,
         contact: document.getElementById('attending-contact').value,
@@ -322,13 +405,16 @@
         timestamp: new Date().toISOString()
       };
       
+      if (!rsvpData.name || !rsvpData.contact) {
+        alert('Please fill in all required fields');
+        return;
+      }
+      
       saveRSVP(rsvpData);
       showConfirmation(rsvpData);
-    });
+    }
     
-    document.getElementById('notAttending-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      
+    function submitNotAttendingForm() {
       const rsvpData = {
         name: document.getElementById('notAttending-name').value,
         contact: document.getElementById('notAttending-contact').value,
@@ -337,9 +423,14 @@
         timestamp: new Date().toISOString()
       };
       
+      if (!rsvpData.name || !rsvpData.contact) {
+        alert('Please fill in all required fields');
+        return;
+      }
+      
       saveRSVP(rsvpData);
       showConfirmation(rsvpData);
-    });
+    }
     
     function saveRSVP(data) {
       let rsvps = JSON.parse(localStorage.getItem('kianBirthdayRSVPs') || '[]');
@@ -349,24 +440,30 @@
     }
     
     function showConfirmation(data) {
-      const modal = document.getElementById('confirmation-modal');
       const message = document.getElementById('confirmation-message');
       
       if (data.attending) {
         message.innerHTML = `
           <p>Thank you for your RSVP, ${data.name}!</p>
           <p>We look forward to seeing you and your party of ${parseInt(data.adults) + parseInt(data.children)} at Kian's birthday!</p>
+          <p style="font-size: 48px; margin-top: 20px;">🎉</p>
         `;
       } else {
         message.innerHTML = `
           <p>Thank you for letting us know, ${data.name}.</p>
           <p>We're sorry you can't make it but appreciate your response.</p>
+          <p style="font-size: 48px; margin-top: 20px;">😊</p>
         `;
       }
       
-      document.getElementById('rsvp-attending-modal').style.display = 'none';
-      document.getElementById('rsvp-notAttending-modal').style.display = 'none';
-      modal.style.display = 'block';
+      document.getElementById('attending-form').style.display = 'none';
+      document.getElementById('notAttending-form').style.display = 'none';
+      document.getElementById('confirmation-slide').style.display = 'block';
+    }
+    
+    function hideConfirmation() {
+      document.getElementById('confirmation-slide').style.display = 'none';
+      document.querySelector('.slide-container').style.display = 'block';
     }
     
     // Admin Panel Functions
@@ -374,6 +471,10 @@
       updateAdminPanel();
       document.getElementById('admin-modal').style.display = 'block';
     });
+    
+    function closeAdminPanel() {
+      document.getElementById('admin-modal').style.display = 'none';
+    }
     
     function updateAdminPanel() {
       const rsvps = JSON.parse(localStorage.getItem('kianBirthdayRSVPs') || '[]');
