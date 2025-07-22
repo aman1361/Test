@@ -369,7 +369,7 @@
   function showRSVPForm(type) {
     document.querySelector('.slide-container').style.display = 'none';
     document.getElementById('attending').style.display = 'none';
-    document.getElementById('notAttending-form').style.display = 'none';
+    document.getElementById('notAttending').style.display = 'none';
 
     if (type === 'attending') {
       document.getElementById('attending').style.display = 'block';
@@ -380,7 +380,7 @@
 
   function hideRSVPForm() {
     document.getElementById('attending').style.display = 'none';
-    document.getElementById('notAttending-form').style.display = 'none';
+    document.getElementById('notAttending').style.display = 'none';
     document.querySelector('.slide-container').style.display = 'block';
   }
 
@@ -460,7 +460,7 @@
     }
 
     document.getElementById('attending').style.display = 'none';
-    document.getElementById('notAttending-form').style.display = 'none';
+    document.getElementById('notAttending').style.display = 'none';
     document.getElementById('confirmation-slide').style.display = 'block';
   }
 
