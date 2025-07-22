@@ -132,11 +132,6 @@
     .not-attending {
       background-color: #ffebee;
     }
-    
-    /* Hide RSVP forms initially */
-    #attending-form, #notAttending-form, #confirmation-slide {
-      display: none;
-    }
   </style>
 </head>
 
@@ -151,10 +146,80 @@
   </div>
 
   <div class="slide-container">
-    <!-- Your existing slides here -->
-    <!-- ... -->
-
-    <!-- RSVP Choice Slide -->
+    <div class="wrapper">
+      <div class="clash-card barbarian">
+        <div class="leaf"></div>
+        <div class="letter-box">
+          <div class="invitee">Dear, <span class="personName"></span></div>
+          <div class="invitation">We are celebritaing</div>
+          <div class="inviters">Kian`s<br />7th<br />Birtrhday</div>
+          <div class="invitation">Invite you to celebrate<br />the joy of his birthday events</div>
+        </div>
+        <button class="nextBtn">Next <img src="images/next.svg" alt="next" width="12"></button>
+      </div>
+    </div>
+    <div class="wrapper">
+      <div class="clash-card barbarian">
+        <button class="prevBtn"><img src="images/prev.svg" alt="Previous" width="12"> Prev</button>
+        <div class="leaf"></div>
+        <div class="letter-box">
+          <div class="wrap-box">
+            <span class="label-box">September 28<sup>th</sup>, 2025</span>
+          </div>
+          <div class="wrap-box">
+            <i class="heart"><img src="images/heart.svg" alt="heart"></i>
+            <ul class="timeline">
+              <li>
+                <div class="left icon"><img src="images/ganesh.png" alt="ganesh" width="50"></div>
+                <div class="right text">
+                  <div class="timeline-time">2:00 pm</div>
+                  <div class="timeline-title">Start</div>
+                </div>
+              </li>
+              <li>
+                <div class="left text">
+                  <div class="timeline-time">4:00 pm</div>
+                  <div class="timeline-title">Lunch</div>
+                </div>
+                <div class="right icon"><img src="images/lunch.svg" alt="ganesh" width="50"></div>
+              </li>
+              <li>
+                <div class="left icon"><img src="images/dj.png" alt="ganesh" width="50"></div>
+                <div class="right text">
+                  <div class="timeline-time">5:30 pm</div>
+                  <div class="timeline-title">Dance & Kids Activity</div>
+                </div>
+              </li>
+            </ul>
+            <i class="i-heart"><img src="images/heart.svg" alt="heart"></i>
+          </div>
+        </div>
+        <button class="nextBtn">Next <img src="images/next.svg" alt="next" width="12"></button>
+      </div>
+    </div>
+    
+    <div class="wrapper">
+      <div class="clash-card barbarian">
+        <button class="prevBtn"><img src="images/prev.svg" alt="Previous" width="12"> Prev</button>
+        <div class="leaf"></div>
+        <div class="letter-box">
+          <div class="wrap-box">
+            <span class="label-box">Venue</span>
+          </div>
+          <div class="wrap-box">
+            <div class="address">Skyline Room<br />Cerritos Library<br />18025 Bloomfield Ave.<br />Cerritos, CA 90703<br /><br />or<br /></div>
+          </div>
+          <div class="wrap-box">
+            <a class="label-box" target="_blank" href="https://maps.app.goo.gl/X8RRY2AoorZsvGtQ9">Find the Direction</a>
+          </div>
+          <div class="wrap-box">
+            <a class="label-box" href="tel:+1 4423576609">Call Me</a>
+          </div>
+        </div>
+        <button class="nextBtn">Next <img src="images/next.svg" alt="next" width="12"></button>
+      </div>
+    </div>
+    
     <div class="wrapper">
       <div class="clash-card barbarian">
         <button class="prevBtn"><img src="images/prev.svg" alt="Previous" width="12"> Prev</button>
@@ -170,8 +235,8 @@
           <div class="wrap-box">
             <div class="Hashs">
               Please RSVP here:<br />
-              <span class="rsvp-choice" onclick="showRSVPForm('attending')">Will Attend</span><br/>
-              <span class="rsvp-choice" onclick="showRSVPForm('notAttending')">Will Not Attend</span><br/>
+              <span onclick="showRSVPForm('attending')">Will Attend</span><br/>
+              <span onclick="showRSVPForm('notAttending')">Will Not Attend</span><br/>
               <br />
             </div>
           </div>
@@ -180,7 +245,7 @@
     </div>
     
     <!-- Will Attend Form -->
-    <div class="wrapper" id="attending-form">
+    <div class="wrapper" id="attending-form" style="display:none;">
       <div class="clash-card barbarian">
         <button class="prevBtn" onclick="hideRSVPForm()"><img src="images/prev.svg" alt="Previous" width="12"> Prev</button>
         <div class="leaf"></div>
@@ -226,7 +291,7 @@
     </div>
     
     <!-- Will Not Attend Form -->
-    <div class="wrapper" id="notAttending-form">
+    <div class="wrapper" id="notAttending-form" style="display:none;">
       <div class="clash-card barbarian">
         <button class="prevBtn" onclick="hideRSVPForm()"><img src="images/prev.svg" alt="Previous" width="12"> Prev</button>
         <div class="leaf"></div>
@@ -259,7 +324,7 @@
     </div>
     
     <!-- Confirmation Slide -->
-    <div class="wrapper" id="confirmation-slide">
+    <div class="wrapper" id="confirmation-slide" style="display:none;">
       <div class="clash-card barbarian">
         <button class="prevBtn" onclick="hideConfirmation()"><img src="images/prev.svg" alt="Previous" width="12"> Prev</button>
         <div class="leaf"></div>
@@ -295,58 +360,25 @@
     </div>
   </div>
 
+  <div id="snackbar">Copied</div>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
+  <script src='https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js'></script>
+  <script src="js/index.js"></script>
   <script>
-    // Initialize Slick slider
-    $(document).ready(function(){
-      $('.slide-container').slick({
-        dots: false,
-        infinite: false,
-        speed: 300,
-        slidesToShow: 1,
-        adaptiveHeight: true,
-        arrows: false
-      });
-      
-      // Handle next button clicks
-      $('.nextBtn').click(function(){
-        $('.slide-container').slick('slickNext');
-      });
-      
-      // Handle prev button clicks
-      $('.prevBtn').click(function(){
-        $('.slide-container').slick('slickPrev');
-      });
-    });
-
     // RSVP Functions
     function showRSVPForm(type) {
-      // Hide all slides
-      $('.slide-container').slick('unslick');
-      $('.slide-container').hide();
-      
-      // Show the selected form
+      document.querySelector('.slide-container').style.display = 'none';
       if (type === 'attending') {
-        $('#attending-form').show();
+        document.getElementById('attending-form').style.display = 'block';
       } else {
-        $('#notAttending-form').show();
+        document.getElementById('notAttending-form').style.display = 'block';
       }
     }
     
     function hideRSVPForm() {
-      // Hide RSVP forms
-      $('#attending-form').hide();
-      $('#notAttending-form').hide();
-      
-      // Show main slides and reinitialize slider
-      $('.slide-container').show();
-      $('.slide-container').slick({
-        dots: false,
-        infinite: false,
-        speed: 300,
-        slidesToShow: 1,
-        adaptiveHeight: true,
-        arrows: false
-      });
+      document.getElementById('attending-form').style.display = 'none';
+      document.getElementById('notAttending-form').style.display = 'none';
+      document.querySelector('.slide-container').style.display = 'block';
     }
     
     function increment(inputId) {
@@ -424,22 +456,14 @@
         `;
       }
       
-      $('#attending-form').hide();
-      $('#notAttending-form').hide();
-      $('#confirmation-slide').show();
+      document.getElementById('attending-form').style.display = 'none';
+      document.getElementById('notAttending-form').style.display = 'none';
+      document.getElementById('confirmation-slide').style.display = 'block';
     }
     
     function hideConfirmation() {
-      $('#confirmation-slide').hide();
-      $('.slide-container').show();
-      $('.slide-container').slick({
-        dots: false,
-        infinite: false,
-        speed: 300,
-        slidesToShow: 1,
-        adaptiveHeight: true,
-        arrows: false
-      });
+      document.getElementById('confirmation-slide').style.display = 'none';
+      document.querySelector('.slide-container').style.display = 'block';
     }
     
     // Admin Panel Functions
