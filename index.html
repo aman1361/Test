@@ -3,10 +3,10 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Wedding Invitation from Dhruvang</title>
+  <title>KIAN`S 7th BIRTHDAY</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta property="og:site_name" content="Dhruvang & Vidhi | Wedding Invitation">
-  <meta property="og:title" content="Dhruvang & Vidhi | Wedding Invitation" />
+  <meta property="og:site_name" content="KIAN`S BIRTHDAY">
+  <meta property="og:title" content="KIAN`S BIRTHDAY" />
   <meta property="og:image" content="https://dhruvang-vidhi.ga/images/couple.jpg">
   <meta property="og:type" content="website" />
   <meta property="og:updated_time" content="1546232947" />
@@ -14,16 +14,73 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
   <link rel='stylesheet' href='https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css'>
   <link href="https://fonts.googleapis.com/css?family=Charm|Open+Sans:400,700" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="css/style.css">
   <link rel="shortcut icon" href="images/favicon.ico" />
+  <style>
+    /* RSVP Modal Styles */
+    .rsvp-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.7);
+      z-index: 1000;
+      overflow-y: auto;
+    }
+    
+    .rsvp-content {
+      background-color: white;
+      margin: 5% auto;
+      padding: 20px;
+      width: 90%;
+      max-width: 500px;
+      border-radius: 10px;
+      position: relative;
+    }
+    
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 28px;
+      cursor: pointer;
+    }
+    
+    .number-input {
+      width: 60px;
+      text-align: center;
+    }
+    
+    .increment-btn, .decrement-btn {
+      background-color: #f0f0f0;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+    
+    .increment-btn:hover, .decrement-btn:hover {
+      background-color: #e0e0e0;
+    }
+    
+    #confirmation-modal {
+      text-align: center;
+    }
+    
+    #confirmation-message {
+      margin: 20px 0;
+    }
+  </style>
 </head>
 
 <body>
   <canvas></canvas>
   <div id="overlay" class="overlay">
     <div class="info">
-      <div class="head">Wedding Invitation</div>
-      <img src="images/couple.svg" alt="couple" width="100">
+      <div class="head">Birthday Invitation</div>
+      <img src="images/LoadingCake.png" alt="couple" width="100">
       <p>Loading...</p>
     </div>
   </div>
@@ -34,9 +91,9 @@
         <div class="leaf"></div>
         <div class="letter-box">
           <div class="invitee">Dear, <span class="personName"></span></div>
-          <div class="invitation">Together with their Family</div>
-          <div class="inviters">Dhruvang<br />&<br />Vidhi</div>
-          <div class="invitation">Invite you to celebrate<br />the joy of their Wedding events</div>
+          <div class="invitation">We are celebritaing</div>
+          <div class="inviters">Kian`s<br />7th<br />Birtrhday</div>
+          <div class="invitation">Invite you to celebrate<br />the joy of his birthday events</div>
         </div>
         <button class="nextBtn">Next <img src="images/next.svg" alt="next" width="12"></button>
       </div>
@@ -47,7 +104,7 @@
         <div class="leaf"></div>
         <div class="letter-box">
           <div class="wrap-box">
-            <span class="label-box">January 26<sup>th</sup>, 2019</span>
+            <span class="label-box">September 28<sup>th</sup>, 2025</span>
           </div>
           <div class="wrap-box">
             <i class="heart"><img src="images/heart.svg" alt="heart"></i>
@@ -55,13 +112,13 @@
               <li>
                 <div class="left icon"><img src="images/ganesh.png" alt="ganesh" width="50"></div>
                 <div class="right text">
-                  <div class="timeline-time">8:15 am</div>
-                  <div class="timeline-title">Ganesh Puja</div>
+                  <div class="timeline-time">2:00 pm</div>
+                  <div class="timeline-title">Start</div>
                 </div>
               </li>
               <li>
                 <div class="left text">
-                  <div class="timeline-time">12:15 pm</div>
+                  <div class="timeline-time">4:00 pm</div>
                   <div class="timeline-title">Lunch</div>
                 </div>
                 <div class="right icon"><img src="images/lunch.svg" alt="ganesh" width="50"></div>
@@ -69,8 +126,8 @@
               <li>
                 <div class="left icon"><img src="images/dj.png" alt="ganesh" width="50"></div>
                 <div class="right text">
-                  <div class="timeline-time">8:30 pm</div>
-                  <div class="timeline-title">DJ & Garba</div>
+                  <div class="timeline-time">5:30 pm</div>
+                  <div class="timeline-title">Dance & Kids Activity</div>
                 </div>
               </li>
             </ul>
@@ -80,46 +137,7 @@
         <button class="nextBtn">Next <img src="images/next.svg" alt="next" width="12"></button>
       </div>
     </div>
-    <div class="wrapper">
-      <div class="clash-card barbarian">
-        <button class="prevBtn"><img src="images/prev.svg" alt="Previous" width="12"> Prev</button>
-        <div class="leaf"></div>
-        <div class="letter-box">
-          <div class="wrap-box">
-            <span class="label-box">January 27<sup>th</sup>, 2019</span>
-          </div>
-          <div class="wrap-box">
-            <i class="heart"><img src="images/heart.svg" alt="heart"></i>
-            <ul class="timeline">
-              <li>
-                <div class="left icon"><img src="images/car.svg" alt="ganesh" width="50"></div>
-                <div class="right text">
-                  <div class="timeline-time">6:15 am</div>
-                  <div class="timeline-title">Jaan Prasthan<br /><small><a target="_blank" href="https://maps.google.com/?q=Kothamba%2C+Gujarat+389220&ftid=0x3960a6fcc9fa0571:0xf846dfebede79722"
-                        title="Vidhi's Home"><img src="images/map.svg" alt="Map" width="10"> <b>Kothmba</b></a></small></div>
-                </div>
-              </li>
-              <li>
-                <div class="left text">
-                  <div class="timeline-time">12:15 pm</div>
-                  <div class="timeline-title">Lunch</div>
-                </div>
-                <div class="right icon"><img src="images/lunch.svg" alt="ganesh" width="50"></div>
-              </li>
-              <li>
-                <div class="left icon"><img src="images/handshake.svg" alt="ganesh" width="50"></div>
-                <div class="right text">
-                  <div class="timeline-time">2:15 pm</div>
-                  <div class="timeline-title">Hast Melap</div>
-                </div>
-              </li>
-            </ul>
-            <i class="i-heart"><img src="images/heart.svg" alt="heart"></i>
-          </div>
-        </div>
-        <button class="nextBtn">Next <img src="images/next.svg" alt="next" width="12"></button>
-      </div>
-    </div>
+    
     <div class="wrapper">
       <div class="clash-card barbarian">
         <button class="prevBtn"><img src="images/prev.svg" alt="Previous" width="12"> Prev</button>
@@ -129,18 +147,19 @@
             <span class="label-box">Venue</span>
           </div>
           <div class="wrap-box">
-            <div class="address">61, Krushnakunj Park Society,<br />New RTO Road,<br />Vastral, Ahmedabad.<br /><br />or<br /></div>
+            <div class="address">Skyline Room<br />Cerritos Library<br />18025 Bloomfield Ave.<br />Cerritos, CA 90703<br /><br />or<br /></div>
           </div>
           <div class="wrap-box">
-            <a class="label-box" target="_blank" href="https://www.google.com/maps?q=Champ%27s+Home">Find the Direction</a>
+            <a class="label-box" target="_blank" href="https://maps.app.goo.gl/X8RRY2AoorZsvGtQ9">Find the Direction</a>
           </div>
           <div class="wrap-box">
-            <a class="label-box" href="tel:+91 8155896243">Call Me</a>
+            <a class="label-box" href="tel:+1 4423576609">Call Me</a>
           </div>
         </div>
         <button class="nextBtn">Next <img src="images/next.svg" alt="next" width="12"></button>
       </div>
     </div>
+    
     <div class="wrapper">
       <div class="clash-card barbarian">
         <button class="prevBtn"><img src="images/prev.svg" alt="Previous" width="12"> Prev</button>
@@ -149,32 +168,301 @@
           <div class="wrap-box">
             <div class="countdown">
               <div class="days"></div>
-              <div class="first">Days<br />Until We become..</div>
-              <div class="last">Mr & Mrs Gajjar</div>
+              <div class="first">Days<br />Until We become your host</div>
+              <div class="last">Azadeh & Aman</div>
             </div>
           </div>
           <div class="wrap-box">
             <div class="Hashs">
-              We request you to use<br />
-              <span onclick="copyToClipboard('DkKiShaadi')">#DkKiShaadi</span>
-              <span onclick="copyToClipboard('VidhiKiShaadi')">#VidhiKiShaadi</span><br/>
-              <span onclick="copyToClipboard('ChampWedsVidhi')">#ChampWedsVidhi</span>
-              <br />Tags for Social Media Sharing.
+              Please RSVP here:<br />
+              <span onclick="showRSVPForm('attending')">Will Attend</span><br/>
+              <span onclick="showRSVPForm('notAttending')">Will Not Attend</span><br/>
+              <br />
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div id="snackbar">Copied</div>
-  <div class="hideFromUser">
-    <input type="text" id="DkKiShaadi" value="DkKiShadi">
-    <input type="text" id="VidhiKiShaadi" value="VidhiKishadi">
-    <input type="text" id="ChampWedsVidhi" value="ChampWedsVidhi">
+  
+  <!-- RSVP Modal for Attending -->
+  <div id="rsvp-attending-modal" class="rsvp-modal">
+    <div class="rsvp-content">
+      <span class="close-btn" onclick="closeModal('rsvp-attending-modal')">&times;</span>
+      <h2>RSVP - Will Attend</h2>
+      <form id="attending-form">
+        <div class="form-group">
+          <label for="attending-name">Your Name:</label>
+          <input type="text" id="attending-name" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="attending-contact">Email or Phone:</label>
+          <input type="text" id="attending-contact" required>
+        </div>
+        
+        <div class="form-group">
+          <label>Number of Adults:</label>
+          <div class="number-control">
+            <button type="button" class="decrement-btn" onclick="decrement('attending-adults')">-</button>
+            <input type="number" id="attending-adults" class="number-input" value="1" min="0" max="10">
+            <button type="button" class="increment-btn" onclick="increment('attending-adults')">+</button>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label>Number of Children:</label>
+          <div class="number-control">
+            <button type="button" class="decrement-btn" onclick="decrement('attending-children')">-</button>
+            <input type="number" id="attending-children" class="number-input" value="0" min="0" max="10">
+            <button type="button" class="increment-btn" onclick="increment('attending-children')">+</button>
+          </div>
+        </div>
+        
+        <button type="submit" class="submit-btn">Submit RSVP</button>
+      </form>
+    </div>
   </div>
+  
+  <!-- RSVP Modal for Not Attending -->
+  <div id="rsvp-notAttending-modal" class="rsvp-modal">
+    <div class="rsvp-content">
+      <span class="close-btn" onclick="closeModal('rsvp-notAttending-modal')">&times;</span>
+      <h2>RSVP - Will Not Attend</h2>
+      <form id="notAttending-form">
+        <div class="form-group">
+          <label for="notAttending-name">Your Name:</label>
+          <input type="text" id="notAttending-name" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="notAttending-contact">Email or Phone:</label>
+          <input type="text" id="notAttending-contact" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="notAttending-message">Message (optional):</label>
+          <textarea id="notAttending-message"></textarea>
+        </div>
+        
+        <button type="submit" class="submit-btn">Submit RSVP</button>
+      </form>
+    </div>
+  </div>
+  
+  <!-- Confirmation Modal -->
+  <div id="confirmation-modal" class="rsvp-modal">
+    <div class="rsvp-content">
+      <h2>Thank You!</h2>
+      <div id="confirmation-message"></div>
+      <button onclick="closeModal('confirmation-modal')" class="submit-btn">Close</button>
+    </div>
+  </div>
+  
+  <!-- Admin Panel Button -->
+  <div id="admin-button" class="fixed bottom-4 right-4">
+    <button id="show-admin" class="bg-gray-700 hover:bg-gray-800 text-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg">
+      👑
+    </button>
+  </div>
+  
+  <!-- Admin Panel Modal -->
+  <div id="admin-modal" class="rsvp-modal">
+    <div class="rsvp-content" style="max-width: 800px;">
+      <span class="close-btn" onclick="closeModal('admin-modal')">&times;</span>
+      <h2>RSVP Responses</h2>
+      <div id="admin-summary" class="summary-box"></div>
+      <div id="admin-responses" class="responses-container"></div>
+      <button id="export-data" class="submit-btn">Export to CSV</button>
+    </div>
+  </div>
+
+  <div id="snackbar">Copied</div>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
   <script src='https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js'></script>
   <script src="js/index.js"></script>
+  <script>
+    // RSVP Functions
+    function showRSVPForm(type) {
+      if (type === 'attending') {
+        document.getElementById('rsvp-attending-modal').style.display = 'block';
+      } else {
+        document.getElementById('rsvp-notAttending-modal').style.display = 'block';
+      }
+    }
+    
+    function closeModal(modalId) {
+      document.getElementById(modalId).style.display = 'none';
+    }
+    
+    function increment(inputId) {
+      const input = document.getElementById(inputId);
+      if (parseInt(input.value) < parseInt(input.max)) {
+        input.value = parseInt(input.value) + 1;
+      }
+    }
+    
+    function decrement(inputId) {
+      const input = document.getElementById(inputId);
+      if (parseInt(input.value) > parseInt(input.min)) {
+        input.value = parseInt(input.value) - 1;
+      }
+    }
+    
+    // Form Submissions
+    document.getElementById('attending-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const rsvpData = {
+        name: document.getElementById('attending-name').value,
+        contact: document.getElementById('attending-contact').value,
+        adults: document.getElementById('attending-adults').value,
+        children: document.getElementById('attending-children').value,
+        attending: true,
+        timestamp: new Date().toISOString()
+      };
+      
+      saveRSVP(rsvpData);
+      showConfirmation(rsvpData);
+    });
+    
+    document.getElementById('notAttending-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const rsvpData = {
+        name: document.getElementById('notAttending-name').value,
+        contact: document.getElementById('notAttending-contact').value,
+        message: document.getElementById('notAttending-message').value,
+        attending: false,
+        timestamp: new Date().toISOString()
+      };
+      
+      saveRSVP(rsvpData);
+      showConfirmation(rsvpData);
+    });
+    
+    function saveRSVP(data) {
+      let rsvps = JSON.parse(localStorage.getItem('kianBirthdayRSVPs') || '[]');
+      rsvps.push(data);
+      localStorage.setItem('kianBirthdayRSVPs', JSON.stringify(rsvps));
+      updateAdminPanel();
+    }
+    
+    function showConfirmation(data) {
+      const modal = document.getElementById('confirmation-modal');
+      const message = document.getElementById('confirmation-message');
+      
+      if (data.attending) {
+        message.innerHTML = `
+          <p>Thank you for your RSVP, ${data.name}!</p>
+          <p>We look forward to seeing you and your party of ${parseInt(data.adults) + parseInt(data.children)} at Kian's birthday!</p>
+        `;
+      } else {
+        message.innerHTML = `
+          <p>Thank you for letting us know, ${data.name}.</p>
+          <p>We're sorry you can't make it but appreciate your response.</p>
+        `;
+      }
+      
+      document.getElementById('rsvp-attending-modal').style.display = 'none';
+      document.getElementById('rsvp-notAttending-modal').style.display = 'none';
+      modal.style.display = 'block';
+    }
+    
+    // Admin Panel Functions
+    document.getElementById('show-admin').addEventListener('click', function() {
+      updateAdminPanel();
+      document.getElementById('admin-modal').style.display = 'block';
+    });
+    
+    function updateAdminPanel() {
+      const rsvps = JSON.parse(localStorage.getItem('kianBirthdayRSVPs') || '[]');
+      const summary = document.getElementById('admin-summary');
+      const responses = document.getElementById('admin-responses');
+      
+      if (rsvps.length === 0) {
+        summary.innerHTML = '<p>No RSVPs yet</p>';
+        responses.innerHTML = '';
+        return;
+      }
+      
+      // Calculate totals
+      let attendingCount = 0;
+      let adultCount = 0;
+      let childCount = 0;
+      
+      rsvps.forEach(rsvp => {
+        if (rsvp.attending) {
+          attendingCount++;
+          adultCount += parseInt(rsvp.adults);
+          childCount += parseInt(rsvp.children);
+        }
+      });
+      
+      // Update summary
+      summary.innerHTML = `
+        <div class="summary-item">
+          <h3>Total Responses:</h3>
+          <p>${rsvps.length}</p>
+        </div>
+        <div class="summary-item">
+          <h3>Attending:</h3>
+          <p>${attendingCount}</p>
+        </div>
+        <div class="summary-item">
+          <h3>Total Adults:</h3>
+          <p>${adultCount}</p>
+        </div>
+        <div class="summary-item">
+          <h3>Total Children:</h3>
+          <p>${childCount}</p>
+        </div>
+      `;
+      
+      // Update responses list
+      responses.innerHTML = '<h3>All Responses:</h3>';
+      rsvps.forEach(rsvp => {
+        const date = new Date(rsvp.timestamp).toLocaleString();
+        responses.innerHTML += `
+          <div class="response-item ${rsvp.attending ? 'attending' : 'not-attending'}">
+            <p><strong>${rsvp.name}</strong> - ${date}</p>
+            <p>${rsvp.contact}</p>
+            ${rsvp.attending ? 
+              `<p>Attending with ${rsvp.adults} adults and ${rsvp.children} children</p>` : 
+              `<p>Not attending${rsvp.message ? ': ' + rsvp.message : ''}</p>`}
+          </div>
+        `;
+      });
+    }
+    
+    // Export to CSV
+    document.getElementById('export-data').addEventListener('click', function() {
+      const rsvps = JSON.parse(localStorage.getItem('kianBirthdayRSVPs') || '[]');
+      
+      if (rsvps.length === 0) {
+        alert('No data to export');
+        return;
+      }
+      
+      let csvContent = "Name,Contact,Attending,Adults,Children,Message,Timestamp\n";
+      
+      rsvps.forEach(rsvp => {
+        csvContent += `"${rsvp.name}","${rsvp.contact}",${rsvp.attending ? 'Yes' : 'No'},${rsvp.adults || '0'},${rsvp.children || '0'},"${rsvp.message || ''}","${rsvp.timestamp}"\n`;
+      });
+      
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.setAttribute('href', url);
+      link.setAttribute('download', 'kian_birthday_rsvps.csv');
+      link.style.visibility = 'hidden';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    });
+    
+    // Initialize admin panel
+    updateAdminPanel();
+  </script>
 </body>
-
 </html>
